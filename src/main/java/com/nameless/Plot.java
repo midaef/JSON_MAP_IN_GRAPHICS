@@ -17,17 +17,25 @@ public class Plot extends JFrame {
 		init();
 	}
 
+	private void addRender(Parser parser) {
+		Runnable task = () -> {
+			Render render = new Render(parser);
+			frame.add(render);
+			frame.repaint();
+		};
+		Thread thread = new Thread(task);
+		thread.start();
+
+	}
+
 	private void init() {
-		frame = new JFrame("NameLess AR");
+		frame = new JFrame("JSON MAP IN GRAPHICS");
 		frame.setPreferredSize(new Dimension(width, height));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Render render = new Render(parser);
-		frame.add(render);
+		addRender(parser);
 		frame.pack();
 		frame.setResizable(false);
 		frame.setVisible(true);
-		render.repaint();
 	}
-
 
 }

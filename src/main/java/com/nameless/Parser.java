@@ -59,15 +59,36 @@ public class Parser {
 
 	public String getCords(Integer id) {
 		for (int i = 0; i < nodesArray.size(); i++) {
-			JSONObject jsonNode = (JSONObject) nodesArray.get(i);
-			Integer ID = Integer.parseInt(jsonNode.get("id").toString());
+			Integer ID = Integer.parseInt(nodesList.get(i).getId().toString());
 			if (ID == id) {
-				String x = jsonNode.get("x").toString();
-				String y = jsonNode.get("y").toString();
+				String x = nodesList.get(i).getX().toString();
+				String y = nodesList.get(i).getY().toString();
 				return x + "/" + y;
 			}
 		}
 		return "";
+	}
+
+	public String getName(Integer id) {
+		for (int i = 0; i < nodesArray.size(); i++) {
+			Integer ID = Integer.parseInt(nodesList.get(i).getId().toString());
+			if (ID == id) {
+				String name = nodesList.get(i).getName();
+				return name;
+			}
+		}
+		return "";
+	}
+
+	public double getCost(Integer id) {
+		for (int i = 0; i < nodesArray.size(); i++) {
+			Integer ID = nodesList.get(i).getId();
+			if (ID == id) {
+				Float cost = nodesList.get(i).getCost();
+				return cost;
+			}
+		}
+		return 1.0;
 	}
 
 	public Integer getWidth(JSONObject object) {return Integer.parseInt(object.get("width").toString());}
